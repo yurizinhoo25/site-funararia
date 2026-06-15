@@ -28,7 +28,7 @@ import {
   Mail,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import logoAsset from "@/assets/logo-plano-nacional.jpeg.asset.json";
+import logoAsset from "@/assets/logo-plano-nacional.jpeg";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -109,7 +109,7 @@ function Navbar() {
         <nav className="glass flex items-center justify-between rounded-2xl px-4 py-3 sm:px-6">
           <a href="#topo" className="flex items-center gap-3">
             <div className="grid h-11 w-11 place-items-center overflow-hidden rounded-xl bg-white ring-1 ring-gold/40 glow-gold">
-              <img src={logoAsset.url} alt="Plano Nacional Funerária" className="h-full w-full object-cover" />
+              <img src={logoAsset} alt="Plano Nacional Funerária" className="h-full w-full object-cover" />
             </div>
             <div className="leading-tight">
               <div className="font-display text-sm font-bold tracking-tight">{BRAND}</div>
@@ -264,7 +264,7 @@ function Hero() {
                   <div className="grid place-items-center rounded-full bg-gradient-to-br from-gold/30 to-transparent p-6 backdrop-blur-sm">
                     <div className="overflow-hidden rounded-full ring-4 ring-gold/40 glow-gold">
                       <img
-                        src={logoAsset.url}
+                        src={logoAsset}
                         alt="Plano Nacional Funerária"
                         className="h-56 w-56 object-cover sm:h-64 sm:w-64"
                       />
@@ -659,7 +659,7 @@ function Footer() {
           <div>
             <div className="flex items-center gap-3">
               <div className="grid h-11 w-11 place-items-center overflow-hidden rounded-xl bg-white ring-1 ring-gold/40">
-                <img src={logoAsset.url} alt="Plano Nacional Funerária" className="h-full w-full object-cover" />
+                <img src={logoAsset} alt="Plano Nacional Funerária" className="h-full w-full object-cover" />
               </div>
               <div className="leading-tight">
                 <div className="font-display text-sm font-bold">{BRAND}</div>
