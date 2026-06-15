@@ -266,7 +266,7 @@ function Hero() {
                       <img
                         src={logoAsset}
                         alt="Plano Nacional Funerária"
-                        className="h-56 w-56 object-cover sm:h-64 sm:w-64"
+                        className="h-56 w-56 object-contain sm:h-64 sm:w-64"
                       />
                     </div>
                   </div>
