@@ -108,7 +108,7 @@ function Navbar() {
       <div className="mx-auto max-w-7xl px-4">
         <nav className="glass flex items-center justify-between rounded-2xl px-4 py-3 sm:px-6">
           <a href="#topo" className="flex items-center gap-3">
-            <div className="grid h-11 w-11 place-items-center overflow-hidden rounded-xl bg-white ring-1 ring-gold/40 glow-gold">
+            <div className="grid h-16 w-16 place-items-center rounded-xl bg-white ring-1 ring-gold/40 glow-gold">
               <img src={logoAsset} alt="Plano Nacional Funerária" className="h-full w-full object-contain" />
             </div>
             <div className="leading-tight">
