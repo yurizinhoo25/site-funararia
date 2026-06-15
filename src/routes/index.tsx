@@ -658,7 +658,7 @@ function Footer() {
         <div className="grid gap-10 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-3">
-              <div className="grid h-11 w-11 place-items-center overflow-hidden rounded-xl bg-white ring-1 ring-gold/40">
+              <div className="grid h-16 w-16 place-items-center rounded-xl bg-white ring-1 ring-gold/40">
                 <img src={logoAsset} alt="Plano Nacional Funerária" className="h-full w-full object-contain" />
               </div>
               <div className="leading-tight">
