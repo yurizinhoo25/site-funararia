@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
-import { ArrowRight, Check, Clock, Crown, Dumbbell, Facebook, FileText, Film, Flower2, Heart, Instagram, Mail, MapPin, Menu, MessageCircle, Phone, Pill, Plane, Send, Shield, ShoppingBag, Sparkles, Stethoscope, Truck, Users, X } from "lucide-react";
+import { ArrowRight, Check, Clock, Crown, Dumbbell, Facebook, FileText, Film, Flame, Flower2, Heart, Instagram, Mail, MapPin, Menu, MessageCircle, Phone, Pill, Plane, Send, Shield, ShoppingBag, Sparkles, Stethoscope, Truck, Users, X } from "lucide-react";
 //#region src/routes/index.tsx?tsr-split=component
 var logoAsset = "/logo-plano-nacional.png";
 var WHATSAPP = "https://w.app/krlrlm";
@@ -306,6 +306,11 @@ var SERVICOS = [
 		icon: Plane,
 		title: "Translado Nacional & Internacional",
 		desc: "Logística completa para qualquer destino, com agilidade e total segurança."
+	},
+	{
+		icon: Flame,
+		title: "Cremação",
+		desc: "Serviço de cremação com suporte completo, realizado com respeito e dignidade."
 	}
 ];
 function ServicosFuneral() {
@@ -326,7 +331,7 @@ function ServicosFuneral() {
 						/* @__PURE__ */ jsxs("h2", {
 							className: "mt-5 text-3xl font-bold sm:text-4xl lg:text-5xl",
 							children: [
-								"Arranjo funeral particular com",
+								"Serviço funeral particular com",
 								" ",
 								/* @__PURE__ */ jsx("span", {
 									className: "text-gold",
@@ -341,7 +346,7 @@ function ServicosFuneral() {
 					]
 				}),
 				/* @__PURE__ */ jsx("div", {
-					className: "mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4",
+					className: "mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-5",
 					children: SERVICOS.map((s, i) => /* @__PURE__ */ jsxs("div", {
 						"data-reveal": true,
 						style: { animationDelay: `${i * 80}ms` },
@@ -472,11 +477,11 @@ function Planos() {
 						/* @__PURE__ */ jsxs("h2", {
 							className: "mt-5 text-3xl font-bold sm:text-4xl lg:text-5xl",
 							children: [
-								"Proteja quem você ama por",
+								"Proteja quem você ama com",
 								" ",
 								/* @__PURE__ */ jsx("span", {
 									className: "text-gold",
-									children: "menos de R$ 0,60 por dia"
+									children: "planos para toda a família"
 								})
 							]
 						}),
@@ -512,22 +517,12 @@ function Planos() {
 								className: "text-xs text-muted-foreground",
 								children: p.desc
 							}),
-							/* @__PURE__ */ jsxs("div", {
-								className: "mt-6 flex items-baseline gap-1",
-								children: [
-									/* @__PURE__ */ jsx("span", {
-										className: "text-sm text-muted-foreground",
-										children: "R$"
-									}),
-									/* @__PURE__ */ jsx("span", {
-										className: "font-display text-4xl font-bold",
-										children: p.preco
-									}),
-									/* @__PURE__ */ jsx("span", {
-										className: "text-sm text-muted-foreground",
-										children: "/mês"
-									})
-								]
+							/* @__PURE__ */ jsx("div", {
+								className: "mt-6",
+								children: /* @__PURE__ */ jsx("span", {
+									className: "text-sm font-semibold text-gold",
+									children: "Orçamento conforme região"
+								})
 							}),
 							/* @__PURE__ */ jsx("a", {
 								href: WHATSAPP,

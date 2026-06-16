@@ -3,7 +3,7 @@ import { HeadContent, Link, Outlet, Scripts, createFileRoute, createRootRouteWit
 import { jsx, jsxs } from "react/jsx-runtime";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 //#region src/styles.css?url
-var styles_default = "/assets/styles-B8P9hrmn.css";
+var styles_default = "/assets/styles-DwL4xEvr.css";
 //#endregion
 //#region src/lib/lovable-error-reporting.ts
 function reportLovableError(error, context = {}) {
@@ -178,7 +178,7 @@ function RootComponent() {
 }
 //#endregion
 //#region src/routes/index.tsx
-var $$splitComponentImporter = () => import("./routes-B7Wzom_w.js");
+var $$splitComponentImporter = () => import("./routes-Czim60hL.js");
 //#endregion
 //#region src/routeTree.gen.ts
 var rootRouteChildren = { IndexRoute: createFileRoute("/")({ component: lazyRouteComponent($$splitComponentImporter, "component") }).update({

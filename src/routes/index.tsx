@@ -26,6 +26,7 @@ import {
   X,
   ArrowRight,
   Mail,
+  Flame,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 const logoAsset = "/logo-plano-nacional.png";
@@ -324,6 +325,11 @@ const SERVICOS = [
     title: "Translado Nacional & Internacional",
     desc: "Logística completa para qualquer destino, com agilidade e total segurança.",
   },
+  {
+    icon: Flame,
+    title: "Cremação",
+    desc: "Serviço de cremação com suporte completo, realizado com respeito e dignidade.",
+  },
 ];
 
 function ServicosFuneral() {
@@ -335,7 +341,7 @@ function ServicosFuneral() {
             Funeral Particular
           </span>
           <h2 className="mt-5 text-3xl font-bold sm:text-4xl lg:text-5xl">
-            Arranjo funeral particular com{" "}
+            Serviço funeral particular com{" "}
             <span className="text-gold">excelência absoluta</span>
           </h2>
           <p className="mt-4 text-muted-foreground">
@@ -344,7 +350,7 @@ function ServicosFuneral() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
           {SERVICOS.map((s, i) => (
             <div
               key={s.title}
@@ -419,8 +425,8 @@ function Planos() {
             Planos Familiares
           </span>
           <h2 className="mt-5 text-3xl font-bold sm:text-4xl lg:text-5xl">
-            Proteja quem você ama por{" "}
-            <span className="text-gold">menos de R$ 0,60 por dia</span>
+            Proteja quem você ama com{" "}
+            <span className="text-gold">planos para toda a família</span>
           </h2>
           <p className="mt-4 text-muted-foreground">
             Planos acessíveis, sem carência abusiva e com benefícios reais para toda a
@@ -454,10 +460,8 @@ function Planos() {
               <h3 className="mt-2 text-lg font-bold">{p.nome}</h3>
               <p className="text-xs text-muted-foreground">{p.desc}</p>
 
-              <div className="mt-6 flex items-baseline gap-1">
-                <span className="text-sm text-muted-foreground">R$</span>
-                <span className="font-display text-4xl font-bold">{p.preco}</span>
-                <span className="text-sm text-muted-foreground">/mês</span>
+              <div className="mt-6">
+                <span className="text-sm font-semibold text-gold">Orçamento conforme região</span>
               </div>
 
               <a

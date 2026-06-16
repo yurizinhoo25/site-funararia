@@ -3,17 +3,17 @@ var tsrStartManifest = () => ({ routes: {
 	__root__: {
 		filePath: "C:/site funeraria/site funeraria/src/routes/__root.tsx",
 		children: ["/"],
-		preloads: ["/assets/index-CGhsdoaS.js"],
+		preloads: ["/assets/index-C9wmlBzM.js"],
 		scripts: [{ attrs: {
 			type: "module",
 			async: !0,
-			src: "/assets/index-CGhsdoaS.js"
+			src: "/assets/index-C9wmlBzM.js"
 		} }]
 	},
 	"/": {
 		filePath: "C:/site funeraria/site funeraria/src/routes/index.tsx",
 		children: void 0,
-		preloads: ["/assets/routes-D3XxMK9f.js"]
+		preloads: ["/assets/routes-DrbwVqTf.js"]
 	}
 } });
 //#endregion
