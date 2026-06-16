@@ -1,15 +1,129 @@
 import { n as createMiddleware } from "./createStart-Dt05N14y.js";
-import { RouterProvider } from "@tanstack/react-router";
 import "react";
+import { RouterProvider } from "@tanstack/react-router";
 import { jsx } from "react/jsx-runtime";
-import { AsyncLocalStorage } from "node:async_hooks";
-import { mergeHeaders } from "@tanstack/router-core/ssr/client";
-import { createRawStreamRPCPlugin, createSerializationAdapter, defaultSerovalPlugins, executeRewriteInput, getScriptPreloadAttrs, getStylesheetHref, invariant, isNotFound, isRedirect, isResolvedRedirect, makeSerovalPlugin, resolveManifestAssetLink, resolveManifestCssLink, rootRouteId } from "@tanstack/router-core";
-import { fromJSON, toCrossJSONAsync, toCrossJSONStream } from "seroval";
 import { defineHandlerCallback, renderRouterToStream } from "@tanstack/react-router/ssr/server";
+import { AsyncLocalStorage } from "node:async_hooks";
 import { H3Event, toResponse } from "h3-v2";
+import { createRawStreamRPCPlugin, createSerializationAdapter, defaultSerovalPlugins, executeRewriteInput, getScriptPreloadAttrs, getStylesheetHref, invariant, isNotFound, isRedirect, isResolvedRedirect, makeSerovalPlugin, resolveManifestAssetLink, resolveManifestCssLink, rootRouteId } from "@tanstack/router-core";
+import { mergeHeaders } from "@tanstack/router-core/ssr/client";
+import { fromJSON, toCrossJSONAsync, toCrossJSONStream } from "seroval";
 import { createMemoryHistory } from "@tanstack/history";
 import { attachRouterServerSsrUtils, getNormalizedURL, getOrigin, isSsrResponse, normalizeSsrResponse, replaceSsrResponse, stripSsrResponseBody } from "@tanstack/router-core/ssr/server";
+//#region node_modules/@tanstack/react-start-server/dist/esm/StartServer.js
+function StartServer(props) {
+	return /* @__PURE__ */ jsx(RouterProvider, { router: props.router });
+}
+//#endregion
+//#region node_modules/@tanstack/react-start-server/dist/esm/defaultStreamHandler.js
+var defaultStreamHandler = defineHandlerCallback(({ request, router, responseHeaders }) => renderRouterToStream({
+	request,
+	router,
+	responseHeaders,
+	children: /* @__PURE__ */ jsx(StartServer, { router })
+}));
+//#endregion
+//#region node_modules/@tanstack/start-server-core/dist/esm/request-response.js
+var GLOBAL_EVENT_STORAGE_KEY = Symbol.for("tanstack-start:event-storage");
+var globalObj$1 = globalThis;
+if (!globalObj$1[GLOBAL_EVENT_STORAGE_KEY]) globalObj$1[GLOBAL_EVENT_STORAGE_KEY] = new AsyncLocalStorage();
+var eventStorage = globalObj$1[GLOBAL_EVENT_STORAGE_KEY];
+function isPromiseLike(value) {
+	return typeof value.then === "function";
+}
+function getSetCookieValues(headers) {
+	const headersWithSetCookie = headers;
+	if (typeof headersWithSetCookie.getSetCookie === "function") return headersWithSetCookie.getSetCookie();
+	const value = headers.get("set-cookie");
+	return value ? [value] : [];
+}
+function mergeEventResponseHeaders(response, event) {
+	if (response.ok) return;
+	const eventSetCookies = getSetCookieValues(event.res.headers);
+	if (eventSetCookies.length === 0) return;
+	const responseSetCookies = getSetCookieValues(response.headers);
+	response.headers.delete("set-cookie");
+	for (const cookie of responseSetCookies) response.headers.append("set-cookie", cookie);
+	for (const cookie of eventSetCookies) response.headers.append("set-cookie", cookie);
+}
+function attachResponseHeaders(value, event) {
+	if (isPromiseLike(value)) return value.then((resolved) => {
+		if (resolved instanceof Response) mergeEventResponseHeaders(resolved, event);
+		return resolved;
+	});
+	if (value instanceof Response) mergeEventResponseHeaders(value, event);
+	return value;
+}
+function requestHandler(handler) {
+	return (request, requestOpts) => {
+		let h3Event;
+		try {
+			h3Event = new H3Event(request);
+		} catch (error) {
+			if (error instanceof URIError) return new Response(null, {
+				status: 400,
+				statusText: "Bad Request"
+			});
+			throw error;
+		}
+		return toResponse(attachResponseHeaders(eventStorage.run({ h3Event }, () => handler(request, requestOpts)), h3Event), h3Event);
+	};
+}
+function getH3Event() {
+	const event = eventStorage.getStore();
+	if (!event) throw new Error(`No StartEvent found in AsyncLocalStorage. Make sure you are using the function within the server runtime.`);
+	return event.h3Event;
+}
+function getResponse() {
+	return getH3Event().res;
+}
+//#endregion
+//#region node_modules/@tanstack/start-server-core/dist/esm/constants.js
+var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
+//#endregion
+//#region node_modules/@tanstack/start-server-core/dist/esm/router-manifest.js
+/**
+* @description Returns the router manifest data that should be sent to the client.
+* This includes only the assets and preloads for the current route and any
+* special assets that are needed for the client. It does not include relationships
+* between routes or any other data that is not needed for the client.
+*
+* @param matchedRoutes - In dev mode, the matched routes are used to build
+* the dev styles URL for route-scoped CSS collection.
+*/
+async function getStartManifest(matchedRoutes) {
+	const { tsrStartManifest } = await import("./_tanstack-start-manifest_v-BbbSwA0Q.js");
+	const startManifest = tsrStartManifest();
+	let routes = startManifest.routes;
+	routes[rootRouteId];
+	const manifestRoutes = {};
+	for (const k in routes) {
+		const v = routes[k];
+		const result = {};
+		if (v.preloads && v.preloads.length > 0) result.preloads = v.preloads;
+		if (v.scripts && v.scripts.length > 0) result.scripts = v.scripts;
+		if (v.css?.length) result.css = v.css;
+		if (result.preloads || result.scripts || result.css) manifestRoutes[k] = result;
+	}
+	return {
+		...startManifest.scriptFormat ? { scriptFormat: startManifest.scriptFormat } : {},
+		...startManifest.inlineCss ? { inlineCss: startManifest.inlineCss } : {},
+		routes: manifestRoutes
+	};
+}
+//#endregion
+//#region \0%23tanstack-start-server-fn-resolver
+var manifest = {};
+async function getServerFnById(id, access) {
+	const serverFnInfo = manifest[id];
+	if (!serverFnInfo) throw new Error("Server function info not found for " + id);
+	const fnModule = serverFnInfo.module ?? await serverFnInfo.importer();
+	if (!fnModule) throw new Error("Server function module not resolved for " + id);
+	const action = fnModule[serverFnInfo.functionName];
+	if (!action) throw new Error("Server function module export not resolved for serverFn ID: " + id);
+	return action;
+}
+//#endregion
 //#region node_modules/@tanstack/start-client-core/dist/esm/constants.js
 var TSS_FORMDATA_CONTEXT = "__TSS_CONTEXT";
 var TSS_SERVER_FUNCTION = Symbol.for("TSS_SERVER_FUNCTION");
@@ -62,9 +176,9 @@ function createNullProtoObject(source) {
 //#endregion
 //#region node_modules/@tanstack/start-storage-context/dist/esm/async-local-storage.js
 var GLOBAL_STORAGE_KEY = Symbol.for("tanstack-start:start-storage-context");
-var globalObj$1 = globalThis;
-if (!globalObj$1[GLOBAL_STORAGE_KEY]) globalObj$1[GLOBAL_STORAGE_KEY] = new AsyncLocalStorage();
-var startStorage = globalObj$1[GLOBAL_STORAGE_KEY];
+var globalObj = globalThis;
+if (!globalObj[GLOBAL_STORAGE_KEY]) globalObj[GLOBAL_STORAGE_KEY] = new AsyncLocalStorage();
+var startStorage = globalObj[GLOBAL_STORAGE_KEY];
 async function runWithStartContext(context, fn) {
 	return startStorage.run(context, fn);
 }
@@ -153,120 +267,6 @@ async function getFailureResponse(opts, ctx) {
 //#region node_modules/@tanstack/start-client-core/dist/esm/getDefaultSerovalPlugins.js
 function getDefaultSerovalPlugins() {
 	return [...(getStartOptions()?.serializationAdapters)?.map(makeSerovalPlugin) ?? [], ...defaultSerovalPlugins];
-}
-//#endregion
-//#region node_modules/@tanstack/react-start-server/dist/esm/StartServer.js
-function StartServer(props) {
-	return /* @__PURE__ */ jsx(RouterProvider, { router: props.router });
-}
-//#endregion
-//#region node_modules/@tanstack/react-start-server/dist/esm/defaultStreamHandler.js
-var defaultStreamHandler = defineHandlerCallback(({ request, router, responseHeaders }) => renderRouterToStream({
-	request,
-	router,
-	responseHeaders,
-	children: /* @__PURE__ */ jsx(StartServer, { router })
-}));
-//#endregion
-//#region node_modules/@tanstack/start-server-core/dist/esm/request-response.js
-var GLOBAL_EVENT_STORAGE_KEY = Symbol.for("tanstack-start:event-storage");
-var globalObj = globalThis;
-if (!globalObj[GLOBAL_EVENT_STORAGE_KEY]) globalObj[GLOBAL_EVENT_STORAGE_KEY] = new AsyncLocalStorage();
-var eventStorage = globalObj[GLOBAL_EVENT_STORAGE_KEY];
-function isPromiseLike(value) {
-	return typeof value.then === "function";
-}
-function getSetCookieValues(headers) {
-	const headersWithSetCookie = headers;
-	if (typeof headersWithSetCookie.getSetCookie === "function") return headersWithSetCookie.getSetCookie();
-	const value = headers.get("set-cookie");
-	return value ? [value] : [];
-}
-function mergeEventResponseHeaders(response, event) {
-	if (response.ok) return;
-	const eventSetCookies = getSetCookieValues(event.res.headers);
-	if (eventSetCookies.length === 0) return;
-	const responseSetCookies = getSetCookieValues(response.headers);
-	response.headers.delete("set-cookie");
-	for (const cookie of responseSetCookies) response.headers.append("set-cookie", cookie);
-	for (const cookie of eventSetCookies) response.headers.append("set-cookie", cookie);
-}
-function attachResponseHeaders(value, event) {
-	if (isPromiseLike(value)) return value.then((resolved) => {
-		if (resolved instanceof Response) mergeEventResponseHeaders(resolved, event);
-		return resolved;
-	});
-	if (value instanceof Response) mergeEventResponseHeaders(value, event);
-	return value;
-}
-function requestHandler(handler) {
-	return (request, requestOpts) => {
-		let h3Event;
-		try {
-			h3Event = new H3Event(request);
-		} catch (error) {
-			if (error instanceof URIError) return new Response(null, {
-				status: 400,
-				statusText: "Bad Request"
-			});
-			throw error;
-		}
-		return toResponse(attachResponseHeaders(eventStorage.run({ h3Event }, () => handler(request, requestOpts)), h3Event), h3Event);
-	};
-}
-function getH3Event() {
-	const event = eventStorage.getStore();
-	if (!event) throw new Error(`No StartEvent found in AsyncLocalStorage. Make sure you are using the function within the server runtime.`);
-	return event.h3Event;
-}
-function getResponse() {
-	return getH3Event().res;
-}
-//#endregion
-//#region node_modules/@tanstack/start-server-core/dist/esm/constants.js
-var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
-//#endregion
-//#region node_modules/@tanstack/start-server-core/dist/esm/router-manifest.js
-/**
-* @description Returns the router manifest data that should be sent to the client.
-* This includes only the assets and preloads for the current route and any
-* special assets that are needed for the client. It does not include relationships
-* between routes or any other data that is not needed for the client.
-*
-* @param matchedRoutes - In dev mode, the matched routes are used to build
-* the dev styles URL for route-scoped CSS collection.
-*/
-async function getStartManifest(matchedRoutes) {
-	const { tsrStartManifest } = await import("./_tanstack-start-manifest_v-CSbj0H33.js");
-	const startManifest = tsrStartManifest();
-	let routes = startManifest.routes;
-	routes[rootRouteId];
-	const manifestRoutes = {};
-	for (const k in routes) {
-		const v = routes[k];
-		const result = {};
-		if (v.preloads && v.preloads.length > 0) result.preloads = v.preloads;
-		if (v.scripts && v.scripts.length > 0) result.scripts = v.scripts;
-		if (v.css?.length) result.css = v.css;
-		if (result.preloads || result.scripts || result.css) manifestRoutes[k] = result;
-	}
-	return {
-		...startManifest.scriptFormat ? { scriptFormat: startManifest.scriptFormat } : {},
-		...startManifest.inlineCss ? { inlineCss: startManifest.inlineCss } : {},
-		routes: manifestRoutes
-	};
-}
-//#endregion
-//#region \0%23tanstack-start-server-fn-resolver
-var manifest = {};
-async function getServerFnById(id, access) {
-	const serverFnInfo = manifest[id];
-	if (!serverFnInfo) throw new Error("Server function info not found for " + id);
-	const fnModule = serverFnInfo.module ?? await serverFnInfo.importer();
-	if (!fnModule) throw new Error("Server function module not resolved for " + id);
-	const action = fnModule[serverFnInfo.functionName];
-	if (!action) throw new Error("Server function module export not resolved for serverFn ID: " + id);
-	return action;
 }
 //#endregion
 //#region node_modules/@tanstack/start-server-core/dist/esm/frame-protocol.js
@@ -1205,7 +1205,7 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
 	const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-		import("./router-DjdqheZO.js"),
+		import("./router-BUZhCXPC.js"),
 		import("./start-EOAzYlXa.js"),
 		import("./empty-plugin-adapters-D9UWiqvJ.js")
 	]);

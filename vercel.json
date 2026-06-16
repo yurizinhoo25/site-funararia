@@ -16,6 +16,10 @@
       "dest": "/dist/client/assets/$1"
     },
     {
+      "src": "/([^/]+\\.(png|jpg|jpeg|svg|ico|webp|gif))",
+      "dest": "/dist/client/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "dist/server/server.js"
     }

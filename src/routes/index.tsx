@@ -28,7 +28,7 @@ import {
   Mail,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import logoAsset from "@/assets/logo-plano-nacional.png";
+const logoAsset = "/logo-plano-nacional.png";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
