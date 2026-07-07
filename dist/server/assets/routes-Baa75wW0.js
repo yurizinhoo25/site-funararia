@@ -3,7 +3,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { ArrowRight, Check, Clock, Crown, Dumbbell, Facebook, FileText, Film, Flame, Flower2, Heart, Instagram, Mail, MapPin, Menu, MessageCircle, Phone, Pill, Plane, Send, Shield, ShoppingBag, Sparkles, Stethoscope, Truck, Users, X } from "lucide-react";
 //#region src/routes/index.tsx?tsr-split=component
 var logoAsset = "/logo-plano-nacional.png";
-var WHATSAPP = "https://w.app/krlrlm";
+var WHATSAPP = "https://wa.me/5531986948998";
 var PHONE_DISPLAY = "(31) 3272-5307";
 var PHONE_TEL = "tel:+553132725307";
 var EMAIL = "assistencialplanonaciol@gmail.com";

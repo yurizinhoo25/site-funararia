@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-const WHATSAPP = "https://w.app/krlrlm";
+const WHATSAPP = "https://wa.me/5531986948998";
 const EMERGENCY = WHATSAPP;
 const PHONE_DISPLAY = "(31) 3272-5307";
 const PHONE_TEL = "tel:+553132725307";
