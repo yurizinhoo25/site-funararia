@@ -697,7 +697,7 @@ function Footer() {
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
                 <span>
                   <span className="block font-semibold text-foreground">Unidade Veneza</span>
-                  Av. Dionísio Gomes, 1014 — Veneza, Ribeirão das Neves
+                  Rua Julieta Gomes, 296, com Mário Lúcio Solano Filho, a 100 metros do Cemitério Porto Seguro — Bairro Porto Seguro, Ribeirão das Neves
                 </span>
               </li>
             </ul>
